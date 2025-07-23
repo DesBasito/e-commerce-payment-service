@@ -2,6 +2,7 @@ package kg.manurov.ecommerce.services;
 
 import kg.manurov.ecommerce.dto.PaymentRequest;
 import kg.manurov.ecommerce.mapper.PaymentMapper;
+import kg.manurov.ecommerce.model.Payment;
 import kg.manurov.ecommerce.repositories.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class PaymentService {
     private final NotificationProducer notificationProducer;
 
     public Integer createPayment(PaymentRequest request) {
-        var payment = this.repository.save(this.mapper.toPayment(request));
+        Payment payment = this.repository.save(this.mapper.toPayment(request));
 
         this.notificationProducer.sendNotification(
                 new PaymentNotificationRequest(
